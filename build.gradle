@@ -1,0 +1,66 @@
+plugins {
+    id 'java'
+    id "com.gradleup.shadow" version "9.4.2"
+}
+
+group = 'dev.cakestudio'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://repo.papermc.io/repository/maven-public/' }
+    maven { url = 'https://jitpack.io/' }
+    maven { url = 'https://repo.tcoded.com/releases' } // Folia
+    maven { url = 'https://repo.nightexpressdev.com/releases' } // aka CoinsEngine
+}
+
+dependencies {
+    // CakeAuction API
+    compileOnly 'com.github.CakesStudio:CakeAuctionAPI:v1.5.0'
+
+    // Paper API
+    compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
+
+    // Lombok
+    compileOnly "org.projectlombok:lombok:1.18.46"
+    annotationProcessor "org.projectlombok:lombok:1.18.46"
+    testCompileOnly "org.projectlombok:lombok:1.18.46"
+    testAnnotationProcessor "org.projectlombok:lombok:1.18.46"
+
+    compileOnly "com.tcoded:FoliaLib:0.5.1" // Folia
+
+    compileOnly("su.nightexpress.excellenteconomy:ExcellentEconomy:2.8.0") // aka coinsengine
+    compileOnly("su.nightexpress.nightcore:main:2.16.3") // nightcore
+
+    // Adventure API
+    compileOnly 'net.kyori:adventure-platform-bukkit:4.4.1'
+    compileOnly 'net.kyori:adventure-text-minimessage:4.26.1'
+    compileOnly 'net.kyori:adventure-text-serializer-legacy:4.26.1'
+    compileOnly 'net.kyori:adventure-text-serializer-plain:4.26.1'
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(25)
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.jar {
+    enabled = false
+}
+
+tasks.shadowJar {
+    archiveFileName.set("AucCoinsEngine-${version}.jar")
+    destinationDirectory.set(layout.buildDirectory.dir("libs"))
+
+    relocate 'net.kyori', 'dev.cakestudio.cakeauction.libs.kyori'
+    relocate 'com.tcoded.folialib', 'dev.cakestudio.cakeauction.libs.folialib'
+
+    mergeServiceFiles()
+}
+
+tasks.build {
+    dependsOn tasks.shadowJar
+}

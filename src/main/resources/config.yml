@@ -1,0 +1,5 @@
+# Для того чтобы аукцион использовал экономику ExcellentEconomy нужно указать её в plugins/CakeAuction/config.yml в general.economy
+#
+# ID валюты в CoinsEngine(ExcellentEconomy), которая будет использоваться для аукциона.
+# По умолчанию "coins". Убедитесь что эта валюта создана в конфиге CoinsEngine
+currency-id: "coins"
