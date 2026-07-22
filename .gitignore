@@ -8,6 +8,7 @@ gradle.properties
 *.ipr
 *.iws
 # IntelliJ
+bin/
 out/
 mappings
 mappings-cloud
