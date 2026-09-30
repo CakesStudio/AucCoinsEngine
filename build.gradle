@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'dev.cakestudio'
-version = '1.0.0'
+version = '2.0.0'
 
 repositories {
     mavenCentral()
@@ -16,7 +16,7 @@ repositories {
 
 dependencies {
     // CakeAuction API
-    compileOnly 'com.github.CakesStudio:CakeAuctionAPI:v1.5.0'
+    compileOnly 'com.github.CakesStudio:CakeAuctionAPI:v2.0.0'
 
     // Paper API
     compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
